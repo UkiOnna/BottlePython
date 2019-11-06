@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<table>
+    % for car in cars:
+    <tr>
+        <td>{{car['name']}}</td>
+        <td>{{car['price']}}</td>
+    </tr>
+    % end
+</table>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>
