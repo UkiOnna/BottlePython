@@ -1,30 +1,34 @@
+from bottle import route, run, request, static_file, template, get, post, redirect
+from peewee import *
 
-from bottle import route, run, request, static_file, template
+messages = []
 
 
-@route('/message')
-def hello():
-    return "JekaLox"
-
-@route("/cars")
-def get_cars():
-    cars=[
-        {"name":"Audi",'price':'5000'}
-    ]
-    return dict(data=cars)
-
-@route('/msq')
-def message():
-    name=request.query.name
-    age=request.query.age
-    return "{0},{1}".format(name,age)
 @route('/')
 def home():
-    cars = [
-        {"name": "Audi", 'price': '5000'},
-        {"name": "Audi", 'price': '5000'}
+    contacts = [
+        {'name': 'John', 'surname': 'Doe', 'phone-number': '870007078979', 'address': 'Abay 1', },
+        {'name': 'Sam', 'surname': 'Smith', 'phone-number': '87777899456', 'address': 'Esil 27', },
     ]
-    return template('index.html',root='./',cars=cars)
+    return template('index.html', root='./', contacts=contacts, messages=messages)
 
 
-run(host='localhost',port=8080,debug=True)
+@get('/message')
+def message():
+    return template('form.html', root='./')
+
+
+@post('/message')
+def getMessage():
+    message = {
+            'name': request.forms.get('name'),
+            'phone': request.forms.get('phone'),
+            'message': request.forms.get('message')
+        }
+
+    messages.append(message)
+    print(message)
+    redirect("/")
+
+
+run(host='localhost', port=8080, debug=True)

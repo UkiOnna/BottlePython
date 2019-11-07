@@ -5,15 +5,25 @@
 <h1>My First Heading</h1>
 
 <table>
-    % for car in cars:
+    % for contact in contacts:
     <tr>
-        <td>{{car['name']}}</td>
-        <td>{{car['price']}}</td>
+        <td>Name:{{contact['name']}}</td>
+        <td>Surname:{{contact['surname']}}</td>
+        <td>Phone-number:{{contact['phone-number']}}</td>
+        <td>Address:{{contact['address']}}</td>
     </tr>
     % end
 </table>
-
-<p>My first paragraph.</p>
+<br>
+<table>
+    % for message in messages:
+    <tr>
+        <td>Name:{{message['name']}}</td>
+        <td>Phone-number:{{message['phone']}}</td>
+        <td>Message:{{message['message']}}</td>
+    </tr>
+    % end
+</table>
 
 </body>
 </html>
